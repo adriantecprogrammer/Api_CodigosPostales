@@ -5,24 +5,34 @@ import com.apiCodigosPostales.model.entity.dao.EstadoDao;
 import com.apiCodigosPostales.service.IEstado;
 import io.micronaut.transaction.annotation.Transactional;
 
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Singleton
+@Named("implementacion")
 public class Estadoimpl implements IEstado {
 
-
     private EstadoDao estadoDao;
-    @Override
+    public Estadoimpl (EstadoDao estadoDao){
+        this.estadoDao=estadoDao;
+    }
+
     @Transactional()
+    @Override
     public Estado save(Estado estado) {
         return estadoDao.save(estado);
     }
 
-    @Override
     @Transactional(readOnly = true)
-    public Estado findById(int id) {
-        return estadoDao.findById(id).orElse(null);
+    @Override
+    public Estado findById(int id_estado) {
+        return estadoDao.findById(id_estado).orElse(null);
     }
 
-    @Override
     @Transactional()
+    @Override
     public void delete(Estado estado) {
         estadoDao.delete(estado);
 
