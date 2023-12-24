@@ -1,6 +1,7 @@
 package com.apiCodigosPostales.model.entity.dao;
 
 
+import io.micronaut.serde.annotation.Serdeable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -13,18 +14,20 @@ import lombok.ToString;
 
 import java.io.Serializable;
 
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Entity
 @Table(name = "estados")
 
-public class Estado implements Serializable {
+@Serdeable.Serializable
+public class Estado{
     @Id
     @Column(name = "id_estados")
-   public   int id_estados ;
+   public int id ;
+
     @Column(name ="estados")
-  private  String estados;
+  public String estados;
 
 }

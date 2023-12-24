@@ -1,10 +1,7 @@
 package com.apiCodigosPostales.controller;
 import com.apiCodigosPostales.model.entity.dao.Estado;
-import com.apiCodigosPostales.model.entity.dao.EstadoDao;
-import com.apiCodigosPostales.service.IEstado;
 import com.apiCodigosPostales.service.impl.Estadoimpl;
 import io.micronaut.http.annotation.*;
-import jakarta.inject.Inject;
 
 import javax.inject.Named;
 
@@ -12,8 +9,8 @@ import javax.inject.Named;
 @Controller("/api/v1")
 
 public class EstadoController {
-    public IEstado estadoSer;
-    public EstadoController(@Named("implementacion") IEstado estadoSer){
+    private Estadoimpl estadoSer;
+    public EstadoController( Estadoimpl estadoSer){
         this.estadoSer=estadoSer;
     }
     @Post("estado")
@@ -27,16 +24,14 @@ public class EstadoController {
         return estadoSer.save(estado);
 
     }
-
     @Delete("estado/{id_estado}")
-    public void delete (@PathVariable int id_estado){
+    public void delete (int id_estado){
         Estado estadoDelete =estadoSer.findById(id_estado);
         estadoSer.delete(estadoDelete);
 
     }
-
     @Get("estado/{id_estado}")
-    public Estado showById(@PathVariable int id_estado){
+    public Estado showById( int id_estado){
         return estadoSer.findById(id_estado);
     }
 
